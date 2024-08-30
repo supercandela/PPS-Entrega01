@@ -1,0 +1,46 @@
+.errors-on-the-forms {
+    color: var(--ion-color-danger);
+}
+
+form {
+    padding-top: 25vh;
+}
+
+#fast-login {
+    margin-top: 15vh;
+    ion-item {
+        background: transparent;
+    }
+
+    h3 {
+        font-size: large;
+        font-weight: 600;
+        color: red;
+    }
+
+    ion-button {
+        margin: 0;
+        
+        .grid-avatars {
+            margin-right: 0;
+            margin-left: 0;
+            padding-right: 0;
+            padding-left: 0;
+            ion-col {
+                display: flex;
+                justify-content: center;
+                
+                ion-text {
+                    color: var(--ion-color-danger);
+                }
+            }
+        }
+    }
+}
+
+ion-col.no-lateral-margin-or-padding {
+    margin-right: 0;
+    margin-left: 0;
+    padding-right: 0;
+    padding-left: 0;
+}
