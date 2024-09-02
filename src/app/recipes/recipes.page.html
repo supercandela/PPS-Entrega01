@@ -2,18 +2,23 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-button (click)="onLogout()">
-        Logout
+        Cerrar sesión
       </ion-button>
     </ion-buttons>
-    <ion-title>Recipes</ion-title>
+    <ion-title>Bienvenido</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
+
+  <div class="container ion-text-center">
+    <img src="../../assets/icon/thundercats-logo-transparent-6020.png" />
+  </div>
+
+  <!-- <ion-list>
     <app-recipe-item
       *ngFor="let recipe of recipes"
       [recipeItem]="recipe"
     ></app-recipe-item>
-  </ion-list>
+  </ion-list> -->
 </ion-content>

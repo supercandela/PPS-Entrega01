@@ -1,13 +1,13 @@
-.errors-on-the-forms {
-    color: var(--ion-color-danger);
+form {
+    padding-top: 20vh;
 }
 
-form {
-    padding-top: 25vh;
+.errors-on-the-forms {
+    color: var(--ion-color-warning);
 }
 
 #fast-login {
-    margin-top: 15vh;
+    margin-top: 7vh;
     ion-item {
         background: transparent;
     }

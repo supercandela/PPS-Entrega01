@@ -29,7 +29,7 @@ export class AuthPage implements OnInit {
   authenticate (email: string, password: string) {
     this.isLoading = true;
     this.loadingCtrl
-      .create({ keyboardClose: true, message: 'Logging in...' })
+      .create({ keyboardClose: true, message: 'Ingresando, aguarde unos instantes...' })
       .then(loadingEl => {
         loadingEl.present();
 
