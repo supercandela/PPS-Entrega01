@@ -26,7 +26,7 @@ export class AuthPage implements OnInit {
 
   ngOnInit() {}
 
-  authenticate (email: string, password: string) {
+  authenticate (authform: NgForm) {
     this.isLoading = true;
     this.loadingCtrl
       .create({ keyboardClose: true, message: 'Ingresando, aguarde unos instantes...' })
@@ -37,28 +37,30 @@ export class AuthPage implements OnInit {
 
         //Chequea si el usuario se quiere loguear o si quiere crear una nueva cuenta y hace el llamado a la api según lo que necesita
         if (this.isLogin) {
-          authObs = this.authService.login(email, password);
+          authObs = this.authService.login(authform.value.email, authform.value.password);
         } else {
-          authObs = this.authService.signup(email, password);
+          authObs = this.authService.signup(authform.value.email, authform.value.password);
         }
         authObs.subscribe(resData => {
             console.log(resData);
             this.isLoading = false;
             loadingEl.dismiss();
+            authform.controls['email'].setValue('');
+            authform.controls['password'].setValue('');
             this.router.navigateByUrl('/recipes');
           }, errorRes => {
             loadingEl.dismiss();
             const code = errorRes.error.error.message;
-            let message = 'Could not sign you up, please try again.';
+            let message = 'No pudiste acceder. Volvé a intentarlo.';
             //Chequea el error y sobre escribe el mensaje que se muestra al usuario
             if (code === 'EMAIL_EXISTS') {
-              message = 'This email address exists already!';
+              message = 'El correo electrónico ya existe.';
             } else if (code === 'EMAIL_NOT_FOUND') {
-              message = 'E-Mail address could bot be found.';
+              message = 'No se encontró el correo electrónico como registrado.';
             } else if (code === 'INVALID_PASSWORD') {
-              message = 'The password is not correct.';
+              message = 'La contraseña es incorrecta.';
             } else if (code === 'INVALID_LOGIN_CREDENTIALS') {
-              message = 'E-Mail address or password is not correct. Please, enter them again.'
+              message = 'E-mail o contraseña incorrectos. Por favor, vuelva a intentar.'
             }
             this.showAlert(message);
           });
@@ -74,16 +76,13 @@ export class AuthPage implements OnInit {
       return;
     }
 
-    const email = authform.value.email;
-    const password = authform.value.password;
-
-    this.authenticate(email, password);
+    this.authenticate(authform);
   }
 
   private showAlert (message: string) {
     this.alertCtrl
       .create({
-        header: 'Authentication failed',
+        header: '¡Error en el inicio de sesión!',
         message: message,
         buttons: ['Ok']
       })
